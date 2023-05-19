@@ -19,6 +19,7 @@ class Users extends CI_Controller
 
 	public function login()
 	{
+
 		$data['title'] = "Login";
 
 		$this->form_validation->set_rules('email', 'email', 'trim|required');
@@ -27,10 +28,12 @@ class Users extends CI_Controller
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
 		if ($this->form_validation->run() == false) {
+
 			$this->load->view('header', $data);
 			$this->load->view('users/login', $data);
 			$this->load->view('footer', $data);
 		} else {
+
 			$email = $this->security->xss_clean($this->input->post('email'));
 			$password = $this->security->xss_clean($this->input->post('password'));
 
@@ -64,6 +67,12 @@ class Users extends CI_Controller
 
 	public function addPlayers()
 	{
+
+		// $data['message'] = 'Player selection stopped by Administrator';
+		// $data['status'] = false;
+		// echo  json_encode($data);
+		// exit;
+
 		$userID = $this->session->userdata('id');
 		$data['status'] = false;
 		$totalPlayers = $this->db->where('taken_by', $userID)->get('users')->num_rows();
@@ -78,12 +87,13 @@ class Users extends CI_Controller
 			->get('users');
 		if ($query->num_rows() > 0) {
 			$this->db
-					->update('users', ['taken_by' => '0', 'team' => 'grey'], ['id' => $_POST['id']]);
+				->update('users', ['taken_by' => '0', 'team' => 'grey'], ['id' => $_POST['id']]);
 			$data['message'] = 'Player selection reverted successfully';
 			$data['id'] = $_POST['id'];
 			$data['image'] = 'grey.png';
 			$data['status'] = true;
-
+			$this->db
+				->update('users', ['selectable' => 1], ['id' => $userID]);
 		} else {
 			$count = $this->db->where('taken_by', '0')->where('id', $_POST['id'])->get('users')->num_rows();
 			if (empty($count)) {
@@ -107,8 +117,6 @@ class Users extends CI_Controller
 				}
 				$this->db
 					->update('users', ['selectable' => 1], ['id' => $userID]);
-
-
 				$data['message'] = 'Player selected successfully';
 				$data['id'] = $_POST['id'];
 				$data['status'] = true;

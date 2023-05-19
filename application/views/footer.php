@@ -29,7 +29,8 @@
 
 							socket.emit('message', {
 								id: response.id,
-								image: response.image
+								image: response.image,
+								status: response.status,
 							});
 
 
@@ -50,7 +51,7 @@
 
 	socket.on('message', function(data) {
 		console.log(data);
-		if (data.id) {
+		if (data.id && data.status == true) {
 			$('#img_' + data.id).attr('src','<?= base_url(); ?>assets/images/' + data.image);
 		}
 
