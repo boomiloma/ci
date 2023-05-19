@@ -16,5 +16,8 @@ class Users_model extends CI_Model{
 
         return false;
     }
+	public function getUsers(){
+		return $this->db->where('role','players')->order_by('first_name','asc')->get('users')->result();
+	}
 }
 ?>

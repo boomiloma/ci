@@ -25,15 +25,23 @@ io.on('connection', function (socket) {
     });
   });
 
-  socket.on( 'new_message', function( data ) {
-    io.sockets.emit( 'new_message', {
-    	name: data.name,
-    	email: data.email,
-    	subject: data.subject,
+  socket.on( 'new_player_selection', function( data ) {
+    io.sockets.emit( 'new_player_selection', {
+			data:data.name,
+			team:data.team,
     	created_at: data.created_at,
     	id: data.id
     });
   });
+
+
+	socket.on( 'message', function( data ) {
+    io.sockets.emit( 'message', {
+    	id: data.id, 
+    	image: data.image, 
+    });
+  });
+
 
   
 });

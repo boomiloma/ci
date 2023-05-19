@@ -1,23 +1,28 @@
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <h1><?php echo $title ?></h1>
-        <?php if($this->session->flashdata('message')) { ?>
-            <div class="alert alert-danger">
-                <?php echo $this->session->flashdata('message')?>
+ 
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h1 class="text-center login-title">Sign in to Premier League</h1>
+            <div class="account-wall">
+                <img class="profile-img" src="<?=base_url('assets/images/grey.png')?>"
+                    alt="">                
+				<?php echo form_open('users/login', array('id' => 'loginForm','class' =>'form-signin')) ?>
+                <input type="text" class="form-control" placeholder="Email" required autofocus name="email">
+				<?php echo form_error('email', '<div class="error">', '</div>') ?>
+                <input type="password" class="form-control" placeholder="Password" required name="password">
+				<?php echo form_error('password', '<div class="error">', '</div>') ?>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    Sign in</button>
+                <label class="checkbox pull-left">
+                    <input type="checkbox" value="remember-me">
+                    Remember me
+                </label>
+               
+				<?php echo form_close(); ?>
             </div>
-        <?php } ?>
-        <?php echo form_open('users/login', array('id' => 'loginForm')) ?>
-            <div class="form-group">
-                <input type="text" name="email" id="email" class="form-control" placeholder="Email" />
-                <?php echo form_error('email', '<div class="error">', '</div>') ?>
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" id="password" class="form-control" placeholder="Password" />
-                <?php echo form_error('password', '<div class="error">', '</div>') ?>
-            </div>
-            <div class="form-group">
-                <input type="submit" name="submit" value="Login" class="btn btn-primary"/>
-            </div>
-        <?php echo form_close(); ?>
+       
+        </div>
     </div>
 </div>
+
