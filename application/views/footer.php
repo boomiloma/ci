@@ -9,7 +9,8 @@
 			$("#load").show();
 			var id = $(this).attr('id');
 			if ($(this).hasClass('selected')) {
-				$(this).removeClass('selected').css('background-color', '#2980b9');
+				$("#load").hide();
+				$(this).removeClass('selected');
 				$('#img_' + id).attr('src', '<?= base_url(); ?>assets/images/grey.png');
 			} else {
 				$(this).addClass('selected');
@@ -40,7 +41,7 @@
 						} else {
 							$('#notif').html('<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 alert alert-danger alert-dismissable"><i class="fa fa-ban"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + response.message + '</div>');
 						}
-
+						$("#load").hide();
 						$('#notif').focus();
 					}
 				});

@@ -76,8 +76,8 @@ class Users extends CI_Controller
 		$userID = $this->session->userdata('id');
 		$data['status'] = false;
 		$totalPlayers = $this->db->where('taken_by', $userID)->get('users')->num_rows();
-		if ($totalPlayers >= 7) {
-			$data['message'] = 'Already you selected 7 players';
+		if ($totalPlayers >= 6) {
+			$data['message'] = 'Already you selected 6 players';
 			echo  json_encode($data);
 			exit;
 		}
@@ -87,7 +87,7 @@ class Users extends CI_Controller
 			->get('users');
 		if ($query->num_rows() > 0) {
 			$this->db
-				->update('users', ['taken_by' => '0', 'team' => 'grey'], ['id' => $_POST['id']]);
+				->update('users', ['taken_by' => '0', 'team' => 'grey','created_at' => date('Y-m-d h:i:s')], ['id' => $_POST['id']]);
 
 				$rows = $this->db->get_where('users', ['id' =>  $_POST['id']])->row();
 
@@ -113,7 +113,7 @@ class Users extends CI_Controller
 					exit;
 				}
 				$this->db
-					->update('users', ['taken_by' => $userID, 'team' => $this->session->userdata('team')], ['id' => $_POST['id']]);
+					->update('users', ['taken_by' => $userID, 'team' => $this->session->userdata('team'),'created_at' => date('Y-m-d h:i:s')], ['id' => $_POST['id']]);
 				$this->db
 					->update('users', ['selectable' => 0], ['id' => $userID]);
 

@@ -76,9 +76,21 @@
 
 					<tbody id="message-tbody">
 
-						<?php foreach ($message as $row) {  ?>
+						<?php foreach ($message as $row) { 
+							
+							if ($row->team != 'grey') {								
+								$color = 'lightcoral';
+								if($row->team == 'blue'){
+									$color = 'lightskyblue';
+								}
+							}else{
+								$color = '';
+							}
 
-							<tr id="row_<?= $row->id ?>" class="<?php echo $row->team; ?>">
+
+							?>
+
+							<tr id="row_<?= $row->id ?>" class="<?php echo $row->team; ?>" style="background-color:<?=$color?>">
 								<td><?php echo $row->first_name; ?></td>
 								<td><?php echo ($row->team == 'grey') ? 'Not Selected' : ucfirst($row->team); ?></td>
 								<td><?php echo ucfirst($this->db->get_where('users', ['id' => $row->id])->row()->first_name); ?></td>
@@ -115,9 +127,13 @@
 				var team = 'Not selected';
 				if (data.team != 'grey') {
 					team = data.team;
+					color = 'lightcoral';
+					if(data.team == 'blue'){
+						color = 'lightskyblue';
+					}
 				}
 				$('#row_' + data.id).remove();
-				$("#message-tbody").prepend('<tr id="row_' + data.id + '" class="' + data.team + '">' +
+				$("#message-tbody").prepend('<tr id="row_' + data.id + '" class="' + data.team + '" style="background:'+color+'">' +
 					'<td>' + data.name + '</td>' +
 					'<td>' + team + '</td>' +
 					'<td>' + data.captain + '</td>' +
