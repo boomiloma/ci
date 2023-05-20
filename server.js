@@ -16,6 +16,9 @@ io.on('connection', function (socket) {
     	id: data.id, 
     	image: data.image, 
     	status: data.status, 
+    	team: data.team, 
+    	captain: data.captain, 
+    	name: data.name, 
     });
   });
 

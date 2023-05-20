@@ -88,10 +88,17 @@ class Users extends CI_Controller
 		if ($query->num_rows() > 0) {
 			$this->db
 				->update('users', ['taken_by' => '0', 'team' => 'grey'], ['id' => $_POST['id']]);
+
+				$rows = $this->db->get_where('users', ['id' =>  $_POST['id']])->row();
+
+
 			$data['message'] = 'Player selection reverted successfully';
 			$data['id'] = $_POST['id'];
 			$data['image'] = 'grey.png';
 			$data['status'] = true;
+			$data['captain'] = '-';
+			$data['team'] = 'grey';
+			$data['name'] = ucfirst($rows->first_name);
 			$this->db
 				->update('users', ['selectable' => 1], ['id' => $userID]);
 		} else {
@@ -121,6 +128,11 @@ class Users extends CI_Controller
 				$data['id'] = $_POST['id'];
 				$data['status'] = true;
 				$data['image'] = $this->session->userdata('image');
+				$row = $this->db->get_where('users', ['id' =>  $this->session->userdata('id')])->row();
+				$rows = $this->db->get_where('users', ['id' =>  $_POST['id']])->row();
+				$data['captain'] = ucfirst($row->first_name);
+				$data['team'] = $row->team;
+				$data['name'] = ucfirst($rows->first_name);
 			}
 		}
 		echo  json_encode($data);

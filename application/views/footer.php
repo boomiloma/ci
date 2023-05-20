@@ -5,14 +5,14 @@
 <script>
 	$(document).ready(function() {
 
-		$('.flip-card-back').click(function() {
+		$('.chumma').click(function() {
 			$("#load").show();
 			var id = $(this).attr('id');
 			if ($(this).hasClass('selected')) {
 				$(this).removeClass('selected').css('background-color', '#2980b9');
 				$('#img_' + id).attr('src', '<?= base_url(); ?>assets/images/grey.png');
 			} else {
-				$(this).addClass('selected').css('background-color', 'green');
+				$(this).addClass('selected');
 		 
 				$.ajax({
 					method: 'POST',
@@ -31,12 +31,17 @@
 								id: response.id,
 								image: response.image,
 								status: response.status,
+								team: response.team,
+								captain: response.captain,
+								name: response.name,
 							});
 
 
 						} else {
 							$('#notif').html('<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 alert alert-danger alert-dismissable"><i class="fa fa-ban"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + response.message + '</div>');
 						}
+
+						$('#notif').focus();
 					}
 				});
 			}

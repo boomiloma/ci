@@ -23,6 +23,7 @@
   <div class="row">
 
   <style>
+	
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -64,10 +65,10 @@ body {
 	cursor: pointer;
 }
 
-.flip-card:hover .flip-card-inner {
+/* .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 	cursor: pointer;
-}
+} */
 
 .flip-card-front, .flip-card-back {
   position: absolute;
@@ -82,11 +83,11 @@ body {
   color: black;
 }
 
-.flip-card-back {
+/* .flip-card-back {
   background-color: #2980b9;
   color: white;
   transform: rotateY(180deg);
-}
+} */
 .form-signin
 {
     max-width: 330px;
