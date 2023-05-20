@@ -8,12 +8,12 @@
 		$('.chumma').click(function() {
 			$("#load").show();
 			var id = $(this).attr('id');
-			if ($(this).hasClass('selected')) {
-				$("#load").hide();
+			if ($(this).hasClass('selected')) {			 
 				$(this).removeClass('selected');
-				$('#img_' + id).attr('src', '<?= base_url(); ?>assets/images/grey.png');
+			 
 			} else {
 				$(this).addClass('selected');
+			}
 		 
 				$.ajax({
 					method: 'POST',
@@ -37,6 +37,10 @@
 								name: response.name,
 							});
 
+							if(response.revert == true){
+								$('#img_' + response.id).attr('src', '<?= base_url(); ?>assets/images/grey.png');
+							}
+
 
 						} else {
 							$('#notif').html('<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 alert alert-danger alert-dismissable"><i class="fa fa-ban"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + response.message + '</div>');
@@ -45,7 +49,7 @@
 						$('#notif').focus();
 					}
 				});
-			}
+		 
 		});
 	});
 

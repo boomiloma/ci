@@ -93,6 +93,7 @@ class Users extends CI_Controller
 
 
 			$data['message'] = 'Player selection reverted successfully';
+			$data['revert'] = true;
 			$data['id'] = $_POST['id'];
 			$data['image'] = 'grey.png';
 			$data['status'] = true;
@@ -100,7 +101,7 @@ class Users extends CI_Controller
 			$data['team'] = 'grey';
 			$data['name'] = ucfirst($rows->first_name);
 			$this->db
-				->update('users', ['selectable' => 1], ['id' => $userID]);
+				->update('users', ['selectable' => 1]);
 		} else {
 			$count = $this->db->where('taken_by', '0')->where('id', $_POST['id'])->get('users')->num_rows();
 			if (empty($count)) {
